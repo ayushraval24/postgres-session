@@ -52,7 +52,8 @@ app.use(
     cookie: {
       secure: false,
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
+      maxAge: 5000, // Session expiration time (1 day)
+      // maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
     },
   })
 );

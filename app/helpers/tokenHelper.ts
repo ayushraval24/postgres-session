@@ -1,14 +1,17 @@
 import jwt from "jsonwebtoken";
 
 export const generateAccessToken = (payload: any) => {
+  // expires in works in seconds if given in number
   const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET_KEY!, {
-    expiresIn: "120ms",
+    expiresIn: 60 * 60 * 60,
   });
   return token;
 };
 
 export const generateRefreshToken = (payload: any) => {
-  const token = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET_KEY!);
+  const token = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET_KEY!, {
+    expiresIn: 60 * 60 * 60,
+  });
   return token;
 };
 

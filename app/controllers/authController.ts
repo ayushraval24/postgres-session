@@ -49,8 +49,8 @@ class AuthController {
       req.session.refreshToken = refreshToken;
 
       return DefaultResponse(res, 200, "Login successful", {
-        accessToken: accessToken,
-        refreshToken: refreshToken,
+        // accessToken: accessToken,
+        // refreshToken: refreshToken,
         user: data,
       });
     } catch (err) {
