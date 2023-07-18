@@ -9,10 +9,8 @@ import cookieParser from "cookie-parser";
 import { Pool } from "pg";
 import { PrismaClient } from "@prisma/client";
 
-// Database configuration
-import prismObj from "./app/config/dbConfig";
-
 const app = express();
+app.use(cookieParser());
 
 const prisma = new PrismaClient();
 
@@ -34,8 +32,14 @@ const pool = new Pool({
 
 const PgSession = pgSession(session);
 
-app.use(cors());
-app.use(cookieParser());
+//  TO ACCESS COOKIE FROM THE FRONTEND  ADD "withCredentials: true" WITH EACH REQUEST
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -52,8 +56,8 @@ app.use(
     cookie: {
       secure: false,
       httpOnly: true,
-      maxAge: 5000, // Session expiration time (1 day)
-      // maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
+      // maxAge: 10000, // Session expiration time (1 day)
+      maxAge: 24 * 60 * 60 * 1000, // Session expiration time (1 day)
     },
   })
 );

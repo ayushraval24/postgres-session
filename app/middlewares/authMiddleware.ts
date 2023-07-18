@@ -36,6 +36,9 @@ export const isAuthenticated = (
     // Get the access token from the Authorization header
     // const accessToken = req.headers.authorization?.split(" ")[1];
 
+    console.log("REQ: ", req.session);
+    console.log("REQ cookie: ", req.cookies);
+
     // Get the refresh token from the session
     const accessToken = req.session.accessToken;
 

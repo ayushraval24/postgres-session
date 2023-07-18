@@ -48,6 +48,8 @@ class AuthController {
       req.session.accessToken = accessToken;
       req.session.refreshToken = refreshToken;
 
+      await req.session.save();
+
       return DefaultResponse(res, 200, "Login successful", {
         // accessToken: accessToken,
         // refreshToken: refreshToken,
