@@ -1,4 +1,5 @@
-const { body } = require("express-validator");
+// const { body } = require("express-validator");
+import { body } from "express-validator";
 
 export const signupValidationRules = [
   // Validate firstName
@@ -11,7 +12,9 @@ export const signupValidationRules = [
   body("email").isEmail().withMessage("Invalid email address"),
 
   // Validate phone
-  body("phone").isMobilePhone().withMessage("Invalid phone number"),
+  body("phone")
+    .isMobilePhone("any", { strictMode: false })
+    .withMessage("Invalid phone number"),
 
   // Validate password
   body("password")

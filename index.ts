@@ -1,4 +1,5 @@
-require("dotenv").config();
+// require("dotenv").config();
+import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -7,12 +8,9 @@ import pgSession from "connect-pg-simple";
 import routes from "./app/routes";
 import cookieParser from "cookie-parser";
 import { Pool } from "pg";
-import { PrismaClient } from "@prisma/client";
 
 const app = express();
 app.use(cookieParser());
-
-const prisma = new PrismaClient();
 
 // Storing session in database
 // const PgSession = pgSession(session);

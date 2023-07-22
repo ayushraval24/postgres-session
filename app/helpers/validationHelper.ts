@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { validationResult } = require("express-validator");
-import { Request, NextFunction } from "express";
+import { Request } from "express";
 
 export const checkValidation = (req: Request) => {
   const errors = validationResult(req);

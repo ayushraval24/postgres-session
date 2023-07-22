@@ -1,4 +1,12 @@
-import { Response, response } from "express";
+import { Response } from "express";
+
+interface DefaultResponseInterface {
+  message: string;
+  statusCode: number;
+  data: any;
+  total?: number;
+  page?: number;
+}
 
 export const DefaultResponse = (
   res: Response,
@@ -8,7 +16,7 @@ export const DefaultResponse = (
   total?: number,
   page?: number
 ) => {
-  let response: {} = {
+  let response: DefaultResponseInterface = {
     message: message,
     statusCode: statusCode,
     data: data,
@@ -28,13 +36,13 @@ export const CookieResponse = (
   res: Response,
   statusCode: number,
   message: string,
-  data?: any,
-  cookieData?: {
+  data: any,
+  cookieData: {
     name: string;
     data: string;
   }
 ) => {
-  let response: {} = {
+  const response: DefaultResponseInterface = {
     message: message,
     statusCode: statusCode,
     data: data,
@@ -42,6 +50,6 @@ export const CookieResponse = (
 
   return res
     .status(statusCode)
-    .cookie(cookieData?.name!, cookieData?.data)
+    .cookie(cookieData.name!, cookieData?.data)
     .json(response);
 };

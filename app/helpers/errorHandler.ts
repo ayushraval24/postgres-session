@@ -1,13 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { CustomError } from "../models/CustomError";
 
 // Custom Error Object
-export const customError = (
-  err: CustomError,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const customError = (err: CustomError, req: Request, res: Response) => {
   const error = new CustomError(err.status, err.message, err.additionalInfo);
   return res.status(error.status).json({
     error: err,

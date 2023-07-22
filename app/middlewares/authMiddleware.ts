@@ -1,30 +1,29 @@
-import { Request, Response, NextFunction } from "express";
-import { DefaultResponse } from "../helpers/defaultResponseHelper";
-import { CustomError } from "../models/CustomError";
+import { NextFunction, Response } from "express";
 import {
   generateAccessToken,
   verifyAccessToken,
   verifyRefreshToken,
 } from "../helpers/tokenHelper";
+import { CustomError } from "../models/CustomError";
 import { RequestExtended } from "../types/global";
 
 export const refreshAccessToken = async (refreshToken: string) => {
-  try {
-    const verified: any = verifyRefreshToken(refreshToken);
+  // try {
+  const verified: any = verifyRefreshToken(refreshToken);
 
-    console.log("Verified refresh: ", verified);
-    if (!verified) {
-      const error = new CustomError(401, "Invalid refresh token");
-      throw error;
-    }
-    const token = generateAccessToken({
-      id: verified?.id,
-      email: verified?.email,
-    });
-    return token;
-  } catch (err) {
-    throw err;
+  console.log("Verified refresh: ", verified);
+  if (!verified) {
+    const error = new CustomError(401, "Invalid refresh token");
+    throw error;
   }
+  const token = generateAccessToken({
+    id: verified?.id,
+    email: verified?.email,
+  });
+  return token;
+  // } catch (err) {
+  //   throw err;
+  // }
 };
 
 export const isAuthenticated = (

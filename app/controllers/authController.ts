@@ -1,17 +1,13 @@
-import { Request, Response, NextFunction } from "express";
-import { checkValidation } from "../helpers/validationHelper";
-import { validationResult } from "express-validator";
-import { authService } from "../services";
-import {
-  CookieResponse,
-  DefaultResponse,
-} from "../helpers/defaultResponseHelper";
-import { RequestExtended } from "../types/global";
+import { NextFunction, Request, Response } from "express";
+import { DefaultResponse } from "../helpers/defaultResponseHelper";
 import {
   generateAccessToken,
   verifyRefreshToken,
 } from "../helpers/tokenHelper";
+import { checkValidation } from "../helpers/validationHelper";
 import { CustomError } from "../models/CustomError";
+import { authService } from "../services";
+import { RequestExtended } from "../types/global";
 
 class AuthController {
   async register(req: Request, res: Response, next: NextFunction) {
